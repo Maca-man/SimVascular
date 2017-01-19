@@ -209,13 +209,20 @@ endif()
 # Find Plugins
 #-----------------------------------------------------------------------------
 set(${proj}_POSSIBLE_PATHS ${${proj}_DIR})
-set(lib_sub_path "lib")
+set(lib_sub_paths "lib" "bin")
+set(lib_build_types "" "/RelWithDebInfo" "/Debug" "/Release")
 
 set(${proj}_POSSIBLE_PLUGIN_LIB_PATHS)
 foreach(p ${${proj}_POSSIBLE_PATHS})
-  set(${proj}_POSSIBLE_PLUGIN_LIB_PATHS ${${proj}_POSSIBLE_PLUGIN_LIB_PATHS}
-		"${p}/${lib_sub_path}/plugins")
+  foreach(s ${lib_sub_paths})
+    foreach(t ${lib_build_types})
+      set(${proj}_POSSIBLE_PLUGIN_LIB_PATHS ${${proj}_POSSIBLE_PLUGIN_LIB_PATHS}
+		    "${p}/${s}/plugins${t}")
+    endforeach()
+  endforeach()
 endforeach()
+
+message("${proj}_POSSIBLE_PLUGIN_LIB_PATHS: ${${proj}_POSSIBLE_PLUGIN_LIB_PATHS}")
 
 set(${proj}_PLUGIN_LIBS_MISSING ${${proj}_PLUGIN_LIBNAMES})
 list(REMOVE_DUPLICATES ${proj}_PLUGIN_LIBS_MISSING)
@@ -244,6 +251,9 @@ foreach(lib ${${proj}_PLUGIN_LIBNAMES})
 endforeach()
 
 #message("${proj}_PLUGIN_LIBRARIES_WORK: ${${proj}_PLUGIN_LIBRARIES_WORK}")
+
+message("${proj}_PLUGIN_LIBRARIES_WORK: ${${proj}_PLUGIN_LIBRARIES_WORK}")
+message("${proj}_PLUGIN_LIBNAMES: ${${proj}_PLUGIN_LIBNAMES}")
 
 list(LENGTH ${proj}_PLUGIN_LIBRARIES_WORK ${proj}_NUMPLUGINS)
 list(LENGTH ${proj}_PLUGIN_LIBNAMES ${proj}_NUMPLUGINS_EXPECTED)
