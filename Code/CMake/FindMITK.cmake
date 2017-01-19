@@ -222,8 +222,6 @@ foreach(p ${${proj}_POSSIBLE_PATHS})
   endforeach()
 endforeach()
 
-message("${proj}_POSSIBLE_PLUGIN_LIB_PATHS: ${${proj}_POSSIBLE_PLUGIN_LIB_PATHS}")
-
 set(${proj}_PLUGIN_LIBS_MISSING ${${proj}_PLUGIN_LIBNAMES})
 list(REMOVE_DUPLICATES ${proj}_PLUGIN_LIBS_MISSING)
 set(${proj}_PLUGIN_LIBRARIES_WORK "")
@@ -251,9 +249,6 @@ foreach(lib ${${proj}_PLUGIN_LIBNAMES})
 endforeach()
 
 #message("${proj}_PLUGIN_LIBRARIES_WORK: ${${proj}_PLUGIN_LIBRARIES_WORK}")
-
-message("${proj}_PLUGIN_LIBRARIES_WORK: ${${proj}_PLUGIN_LIBRARIES_WORK}")
-message("${proj}_PLUGIN_LIBNAMES: ${${proj}_PLUGIN_LIBNAMES}")
 
 list(LENGTH ${proj}_PLUGIN_LIBRARIES_WORK ${proj}_NUMPLUGINS)
 list(LENGTH ${proj}_PLUGIN_LIBNAMES ${proj}_NUMPLUGINS_EXPECTED)
